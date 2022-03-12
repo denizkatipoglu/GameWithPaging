@@ -27,15 +27,16 @@ class DataBaseViewModel @ViewModelInject constructor(
         val dummyGames = mutableListOf<GameResults>()
         GlobalScope.launch {
             Dispatchers.IO {
-                if (database.getGameDao().getDeneme().isNotEmpty()) {
-                    with(database.getGameDao().getDeneme()) {
+                if (database.getGameDao().getAllAsList().isNotEmpty()) {
+                    with(database.getGameDao().getAllAsList()) {
                         for (i in 0 until size) {
                             dummyGames.add(
                                 GameResults(
                                     get(i).id,
                                     "",
                                     get(i).backgroundImage,
-                                    "",
+                                    2,
+                                    get(i).rating,
                                     ""
                                 )
                             )
@@ -50,7 +51,8 @@ class DataBaseViewModel @ViewModelInject constructor(
                                 i.toString(),
                                 "",
                                 "https://media.rawg.io/media/games/942/9424d6bb763dc38d9378b488603c87fa.jpg",
-                                "",
+                                123,
+                                "3.43",
                                 ""
                             )
                         )

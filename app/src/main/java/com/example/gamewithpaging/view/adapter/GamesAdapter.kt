@@ -48,6 +48,6 @@ class GamesAdapter : PagingDataAdapter<GameResults, RecyclerView.ViewHolder>(COM
             oldItem: GameResults,
             newItem: GameResults
         ) = (oldItem is GameResults && newItem is GameResults &&
-                oldItem.id!! == newItem.id!!)
+                oldItem.id == newItem.id)
     }
 }

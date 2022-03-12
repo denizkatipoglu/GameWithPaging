@@ -2,12 +2,12 @@
 
 Used technologies
 
-*Coroutines*
-*Hilt*
-*Room*
-*Coil*
-*Retrofit*
-*Paging 3.0 (rc01)*
+-Coroutines
+-Hilt
+-Room
+-Coil
+-Retrofit
+-Paging 3.0 (rc01)
 
 Meaning of this application
 

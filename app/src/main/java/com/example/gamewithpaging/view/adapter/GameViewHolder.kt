@@ -14,6 +14,12 @@ class GameViewHolder(private val binding: ItemGameBinding) : RecyclerView.ViewHo
         binding.imageGame.load(item!!.backgroundImage!!) {
             placeholder(R.drawable.ic_launcher_background)
         }
+        binding.textGame.text = item.name
+        if (item.rating!!.isNotEmpty()) {
+            binding.textRating.text = item.rating
+        }else{
+            binding.textRating.text = "-"
+        }
     }
 
     companion object {

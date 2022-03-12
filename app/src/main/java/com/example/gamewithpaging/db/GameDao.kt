@@ -17,7 +17,7 @@ interface GameDao {
     fun getAll(): PagingSource<Int, GameResults>
 
     @Query("SELECT * FROM games_result")
-    fun getDeneme(): List<GameResults>
+    fun getAllAsList(): List<GameResults>
 
     @Query("DELETE FROM games_result")
     suspend fun deleteAll()

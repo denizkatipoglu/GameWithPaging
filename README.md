@@ -8,8 +8,11 @@
     Android App
   </p>
 </p>
+<br />
+<br />
 Used technologies
-
+<br />
+<br />
 -MVVM (Architecture)
 <br />
 -Coroutines
@@ -24,10 +27,17 @@ Used technologies
 <br />
 -Paging 3.0 (rc01)
 <br />
+<br />
+<br />
 
 Meaning of this application
 
-There are three way for testing api and paging.
+<b>There are three way for testing api and paging.</b>
+<br />
+<br />
 -You can use only requested
+<br />
 -You can use only Database
+<br />
 -You can use Request and Database
+<br />

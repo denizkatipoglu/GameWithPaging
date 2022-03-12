@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">GameWithPaging</string>
+    <string name="network_and_database">Request And Cache</string>
+    <string name="network_only_page_number">Only Request</string>
+    <string name="database_only">Only Cache</string>
+    <string name="retry">Retry</string>
+    <string name="content_desc_game">game</string>
+</resources>

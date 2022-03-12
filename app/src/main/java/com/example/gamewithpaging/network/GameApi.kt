@@ -1,7 +1,10 @@
 package com.example.gamewithpaging.network
 
 import com.example.gamewithpaging.model.Game
+import com.example.gamewithpaging.model.GameDetailModel
+import com.example.gamewithpaging.model.GameResults
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 
 interface GameApi {
@@ -15,4 +18,10 @@ interface GameApi {
         @Query("ordering") ordered: String,
         @Query("key") key: String
     ): Game
+
+    @GET("games/{id}")
+    suspend fun getDeneme(
+        @Path("id") gamesId: String,
+        @Query("key") key: String
+    ): GameDetailModel
 }

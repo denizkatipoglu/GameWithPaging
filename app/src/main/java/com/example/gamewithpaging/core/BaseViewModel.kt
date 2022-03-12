@@ -14,4 +14,5 @@ abstract class BaseViewModel : ViewModel() {
         dataSource
             .map { pagingData -> pagingData.map { GameResults(it.id,it.name,it.backgroundImage!!,it.ratingCounts!!,it.rating,it.releasedDate!!) } }
     }
+
 }

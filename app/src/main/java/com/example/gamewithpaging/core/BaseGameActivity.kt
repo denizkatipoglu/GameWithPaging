@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.paging.CombinedLoadStates
 import androidx.paging.LoadState
+import com.example.gamewithpaging.Constants
 import com.example.gamewithpaging.view.adapter.GamesLoadStateAdapter
 import com.example.gamewithpaging.databinding.ActivityGamesBinding
 import com.example.gamewithpaging.databinding.GameDetailBinding
@@ -20,7 +21,11 @@ abstract class BaseGameActivity : AppCompatActivity() {
     val gameAdapter by lazy { GamesAdapter(mItemClickListener =object :GamesAdapter.RecyclerViewClickListener{
         override fun onItemClick(selectedGame: GameResults) {
             Toast.makeText(baseContext,selectedGame.name,Toast.LENGTH_SHORT).show()
-            startActivity(Intent(baseContext,GameDetailActivity::class.java))
+
+            val i = Intent(baseContext, GameDetailActivity::class.java).apply {
+                putExtra(Constants.GAME_DETAIL,selectedGame)
+            }
+            startActivity(i)
         }
     }) }
 

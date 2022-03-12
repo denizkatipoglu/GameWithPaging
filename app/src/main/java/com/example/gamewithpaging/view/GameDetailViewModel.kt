@@ -1,19 +1,31 @@
 package com.example.gamewithpaging.view
 
 import androidx.hilt.lifecycle.ViewModelInject
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.ExperimentalPagingApi
-import com.example.gamewithpaging.core.BaseViewModel
-import com.example.gamewithpaging.data.GamesRepository
-import kotlinx.coroutines.launch
+import com.example.gamewithpaging.model.GameDetailModel
+import com.example.gamewithpaging.network.GameApi
+import kotlinx.coroutines.*
 
-class GameDetailViewModel @ViewModelInject constructor(private val repository: GamesRepository) :
+open class GameDetailViewModel @ViewModelInject constructor(private val api:GameApi) :
     ViewModel() {
 
+    private val job = SupervisorJob()
+    private val main: CoroutineDispatcher = Dispatchers.Main
+    protected val io: CoroutineDispatcher = Dispatchers.IO
+    private val gameDetail: MutableLiveData<GameDetailModel> = MutableLiveData()
+
+    fun getGameDetail(): LiveData<GameDetailModel> = gameDetail
 
     init {
         viewModelScope.launch {
         }
+    }
+
+    fun loadGameDetail(gameId: String) = GlobalScope.launch(main + job) {
+        val response = api.getDeneme(gameId, key = "905bf28dea024135b163cb11b38ced30")
+        gameDetail.postValue(response)
     }
 }

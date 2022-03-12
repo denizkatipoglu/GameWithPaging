@@ -6,7 +6,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.gamewithpaging.model.GameResults
 
-class GamesAdapter : PagingDataAdapter<GameResults, RecyclerView.ViewHolder>(COMPARATOR) {
+class GamesAdapter(var mItemClickListener:RecyclerViewClickListener) : PagingDataAdapter<GameResults, RecyclerView.ViewHolder>(COMPARATOR) {
+
+    interface RecyclerViewClickListener {
+        fun onItemClick(selectedGame: GameResults)
+    }
 
     override fun getItemViewType(position: Int): Int {
         return when (getItem(position)) {
@@ -23,7 +27,7 @@ class GamesAdapter : PagingDataAdapter<GameResults, RecyclerView.ViewHolder>(COM
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         getItem(position)?.let {
             when (it) {
-                is GameResults -> (holder as? GameViewHolder)?.bind(it)
+                is GameResults -> (holder as? GameViewHolder)?.bind(it,mItemClickListener)
                 else -> null
             }
         }

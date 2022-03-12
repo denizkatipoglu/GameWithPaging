@@ -4,6 +4,8 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/DeKatipoglu/AndroidStudioProjects/GameWithPaging/app/src/main/res/layout/activity_cats.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/DeKatipoglu/AndroidStudioProjects/GameWithPaging/app/src/main/res/layout/activity_games.xml" value="0.14130434782608695" />
+        <entry key="..\:/Users/DeKatipoglu/AndroidStudioProjects/GameWithPaging/app/src/main/res/layout/game_detail.xml" value="0.14130434782608695" />
         <entry key="..\:/Users/DeKatipoglu/AndroidStudioProjects/GameWithPaging/app/src/main/res/layout/item_cat.xml" value="0.1" />
         <entry key="..\:/Users/DeKatipoglu/AndroidStudioProjects/GameWithPaging/app/src/main/res/layout/item_game.xml" value="0.22" />
         <entry key="..\:/Users/DeKatipoglu/AndroidStudioProjects/GameWithPaging/app/src/main/res/layout/item_load_state.xml" value="0.14130434782608695" />

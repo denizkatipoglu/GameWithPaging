@@ -10,16 +10,22 @@ import com.example.gamewithpaging.model.GameResults
 
 class GameViewHolder(private val binding: ItemGameBinding) : RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(item: GameResults?) {
+    fun bind(item: GameResults?, mlistener: GamesAdapter.RecyclerViewClickListener) {
         binding.imageGame.load(item!!.backgroundImage!!) {
             placeholder(R.drawable.ic_launcher_background)
         }
         binding.textGame.text = item.name
         if (item.rating!!.isNotEmpty()) {
             binding.textRating.text = item.rating
-        }else{
+        } else {
             binding.textRating.text = "-"
         }
+
+        binding.imageGame.setOnClickListener {
+            mlistener.onItemClick(item)
+        }
+
+
     }
 
     companion object {

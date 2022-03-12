@@ -22,6 +22,7 @@
         <activity android:name=".view.db.DatabaseActivity"/>
         <activity android:name=".view.network.NetworkOnlyActivity"/>
         <activity android:name=".view.networkanddb.NetworkAndDatabaseActivity"/>
+        <activity android:name=".view.GameDetailActivity"/>
     </application>
 
 </manifest>

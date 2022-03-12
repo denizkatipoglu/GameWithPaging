@@ -20,11 +20,9 @@ class GameViewHolder(private val binding: ItemGameBinding) : RecyclerView.ViewHo
         } else {
             binding.textRating.text = "-"
         }
-
         binding.imageGame.setOnClickListener {
             mlistener.onItemClick(item)
         }
-
 
     }
 

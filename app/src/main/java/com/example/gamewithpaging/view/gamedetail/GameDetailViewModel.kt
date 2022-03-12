@@ -1,4 +1,4 @@
-package com.example.gamewithpaging.view
+package com.example.gamewithpaging.view.gamedetail
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
@@ -9,7 +9,7 @@ import com.example.gamewithpaging.model.GameDetailModel
 import com.example.gamewithpaging.network.GameApi
 import kotlinx.coroutines.*
 
-open class GameDetailViewModel @ViewModelInject constructor(private val api:GameApi) :
+open class GameDetailViewModel @ViewModelInject constructor(private val api: GameApi) :
     ViewModel() {
 
     private val job = SupervisorJob()
@@ -25,7 +25,7 @@ open class GameDetailViewModel @ViewModelInject constructor(private val api:Game
     }
 
     fun loadGameDetail(gameId: String) = GlobalScope.launch(main + job) {
-        val response = api.getDeneme(gameId, key = "905bf28dea024135b163cb11b38ced30")
+        val response = api.getGameDetail(gameId, key = "905bf28dea024135b163cb11b38ced30")
         gameDetail.postValue(response)
     }
 }

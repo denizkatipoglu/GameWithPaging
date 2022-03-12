@@ -24,7 +24,7 @@
         <activity android:name=".view.networkanddb.NetworkAndDatabaseActivity" />
 
         <activity
-            android:name=".view.GameDetailActivity"
+            android:name=".view.gamedetail.GameDetailActivity"
             android:theme="@style/NoActionBar"/>
     </application>
 

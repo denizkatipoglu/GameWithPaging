@@ -1,4 +1,4 @@
-package com.example.gamewithpaging.view
+package com.example.gamewithpaging.view.gamedetail
 
 import android.os.Bundle
 import android.text.Html
@@ -69,7 +69,7 @@ class GameDetailActivity : AppCompatActivity() {
             placeholder(R.drawable.ic_launcher_background)
         }
         if (resource.rating!!.isNotEmpty()) {
-            bindingDetail.tvVoteAverage
+            bindingDetail.tvVoteAverage.text = resource.rating
         }
 
         if (resource.name.isNotEmpty()) {

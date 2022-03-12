@@ -15,7 +15,8 @@ class GamePagingSource(private val service: GameApi) : PagingSource<Int, GameRes
         val page = params.key ?: STARTING_PAGE_INDEX
         return try {
             val response =
-                service.getGamesList(page = page, size = params.loadSize, ordered = "", key = "905bf28dea024135b163cb11b38ced30")
+                service.getGamesList(page = page, size = params.loadSize, ordered = "released",
+                    platforms = "4,5",key = "905bf28dea024135b163cb11b38ced30")
             LoadResult.Page(
                 data = response.results!!,
                 prevKey = if (page == STARTING_PAGE_INDEX) null else page - 1,

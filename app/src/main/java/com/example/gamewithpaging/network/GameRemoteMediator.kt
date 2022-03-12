@@ -35,7 +35,13 @@ class GameRemoteMediator(
         }
 
         try {
-            val response = api.getGamesList(page = page, size = state.config.pageSize,ordered = "", key = "905bf28dea024135b163cb11b38ced30")
+            val response = api.getGamesList(
+                page = page,
+                size = state.config.pageSize,
+                ordered = "released",
+                platforms = "4,5",
+                key = "905bf28dea024135b163cb11b38ced30"
+            )
             val isEndOfList = response.results!!.isEmpty()
             db.withTransaction {
                 if (loadType == LoadType.REFRESH) {
@@ -58,7 +64,10 @@ class GameRemoteMediator(
         }
     }
 
-    private suspend fun getKeyPageData(loadType: LoadType, state: PagingState<Int, GameResults>): Any {
+    private suspend fun getKeyPageData(
+        loadType: LoadType,
+        state: PagingState<Int, GameResults>
+    ): Any {
         return when (loadType) {
             LoadType.REFRESH -> {
                 val remoteKeys = getRemoteKeyClosestToCurrentPosition(state)
@@ -100,6 +109,4 @@ class GameRemoteMediator(
             ?.data?.firstOrNull()
             ?.let { game -> db.getGameKeysDao().remoteKeysGameId(game.id) }
     }
-
-
 }

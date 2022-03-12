@@ -9,11 +9,9 @@ import androidx.paging.LoadState
 import com.example.gamewithpaging.Constants
 import com.example.gamewithpaging.view.adapter.GamesLoadStateAdapter
 import com.example.gamewithpaging.databinding.ActivityGamesBinding
-import com.example.gamewithpaging.databinding.GameDetailBinding
 import com.example.gamewithpaging.model.GameResults
-import com.example.gamewithpaging.view.GameDetailActivity
+import com.example.gamewithpaging.view.gamedetail.GameDetailActivity
 import com.example.gamewithpaging.view.adapter.GamesAdapter
-import com.example.gamewithpaging.view.networkanddb.NetworkAndDatabaseActivity
 
 abstract class BaseGameActivity : AppCompatActivity() {
     abstract val viewModel: BaseViewModel

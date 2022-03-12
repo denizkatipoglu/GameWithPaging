@@ -12,7 +12,7 @@ abstract class BaseViewModel : ViewModel() {
 
     val games: Flow<PagingData<GameResults>> by lazy {
         dataSource
-            .map { pagingData -> pagingData.map { GameResults(it.id,it.name,it.backgroundImage!!,it.ratingCounts!!,it.rating,it.releasedDate!!) } }
+            .map { pagingData -> pagingData.map { GameResults(it.id,it.name,it.backgroundImage!!,it.ratingCounts!!,it.rating) } }
     }
 
 }

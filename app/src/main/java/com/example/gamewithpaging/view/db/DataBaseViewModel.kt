@@ -38,7 +38,7 @@ class DataBaseViewModel @ViewModelInject constructor(
                                     get(i).backgroundImage,
                                     2,
                                     get(i).rating,
-                                    ""
+                                    get(i).releasedDate
                                 )
                             )
                         }
@@ -53,7 +53,7 @@ class DataBaseViewModel @ViewModelInject constructor(
                                 "https://media.rawg.io/media/games/942/9424d6bb763dc38d9378b488603c87fa.jpg",
                                 123,
                                 "3.43",
-                                Constants.NO_DATA
+                                "2022-13-03"
                             )
                         )
                     }

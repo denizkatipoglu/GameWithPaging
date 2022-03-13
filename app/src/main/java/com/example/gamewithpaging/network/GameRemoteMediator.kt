@@ -5,6 +5,7 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
+import com.example.gamewithpaging.Utils.mergedList
 import com.example.gamewithpaging.db.GameDatabase
 import com.example.gamewithpaging.db.RemoteGameKey
 import com.example.gamewithpaging.model.GameResults
@@ -138,11 +139,5 @@ class GameRemoteMediator(
             .firstOrNull { it.data.isNotEmpty() }
             ?.data?.firstOrNull()
             ?.let { game -> db.getGameKeysDao().remoteKeysGameId(game.id) }
-    }
-
-    fun <T> mergedList(first: List<T>, second: List<T>): List<T> {
-        val list: MutableList<T> = ArrayList(first)
-        list.addAll(second)
-        return list.toSet().toList()
     }
 }

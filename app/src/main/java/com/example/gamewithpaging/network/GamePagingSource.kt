@@ -3,6 +3,7 @@ package com.example.gamewithpaging.network
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import com.example.gamewithpaging.Utils.mergedList
 import com.example.gamewithpaging.model.GameResults
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
@@ -60,11 +61,5 @@ class GamePagingSource(private val service: GameApi) : PagingSource<Int, GameRes
             state.closestPageToPosition(anchorPosition)?.prevKey?.plus(1)
                 ?: state.closestPageToPosition(anchorPosition)?.nextKey?.minus(1)
         }
-    }
-
-    fun <T> mergedList(first: List<T>, second: List<T>): List<T> {
-        val list: MutableList<T> = ArrayList(first)
-        list.addAll(second)
-        return list.toSet().toList()
     }
 }

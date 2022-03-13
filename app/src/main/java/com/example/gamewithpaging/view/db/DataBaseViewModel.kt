@@ -3,6 +3,7 @@ package com.example.gamewithpaging.view.db
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.viewModelScope
 import androidx.paging.ExperimentalPagingApi
+import com.example.gamewithpaging.Constants
 import com.example.gamewithpaging.core.BaseViewModel
 import com.example.gamewithpaging.data.GamesRepository
 import com.example.gamewithpaging.db.GameDatabase
@@ -33,7 +34,7 @@ class DataBaseViewModel @ViewModelInject constructor(
                             dummyGames.add(
                                 GameResults(
                                     get(i).id,
-                                    "",
+                                    get(i).name,
                                     get(i).backgroundImage,
                                     2,
                                     get(i).rating,
@@ -43,17 +44,16 @@ class DataBaseViewModel @ViewModelInject constructor(
                         }
                     }
 
-
                 } else {
                     for (i in 0..10000) {
                         dummyGames.add(
                             GameResults(
                                 i.toString(),
-                                "",
+                                Constants.NO_DATA,
                                 "https://media.rawg.io/media/games/942/9424d6bb763dc38d9378b488603c87fa.jpg",
                                 123,
                                 "3.43",
-                                ""
+                                Constants.NO_DATA
                             )
                         )
                     }

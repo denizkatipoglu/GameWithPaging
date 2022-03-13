@@ -1,6 +1,7 @@
 package com.example.gamewithpaging.core
 
 import android.content.Intent
+import android.text.TextUtils
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
@@ -9,6 +10,7 @@ import androidx.paging.LoadState
 import com.example.gamewithpaging.Constants
 import com.example.gamewithpaging.view.adapter.GamesLoadStateAdapter
 import com.example.gamewithpaging.databinding.ActivityGamesBinding
+import com.example.gamewithpaging.db.GameDatabase
 import com.example.gamewithpaging.model.GameResults
 import com.example.gamewithpaging.view.gamedetail.GameDetailActivity
 import com.example.gamewithpaging.view.adapter.GamesAdapter
@@ -16,16 +18,20 @@ import com.example.gamewithpaging.view.adapter.GamesAdapter
 abstract class BaseGameActivity : AppCompatActivity() {
     abstract val viewModel: BaseViewModel
     lateinit var binding: ActivityGamesBinding
-    val gameAdapter by lazy { GamesAdapter(mItemClickListener =object :GamesAdapter.RecyclerViewClickListener{
-        override fun onItemClick(selectedGame: GameResults) {
-            Toast.makeText(baseContext,selectedGame.name,Toast.LENGTH_SHORT).show()
 
-            val i = Intent(baseContext, GameDetailActivity::class.java).apply {
-                putExtra(Constants.GAME_DETAIL,selectedGame)
+    val gameAdapter by lazy {
+        GamesAdapter(mItemClickListener = object : GamesAdapter.RecyclerViewClickListener {
+            override fun onItemClick(selectedGame: GameResults) {
+                if (selectedGame.name != Constants.NO_DATA){
+                    Toast.makeText(baseContext, selectedGame.name, Toast.LENGTH_SHORT).show()
+                    val i = Intent(baseContext, GameDetailActivity::class.java).apply {
+                        putExtra(Constants.GAME_DETAIL, selectedGame)
+                    }
+                    startActivity(i)
+                }
             }
-            startActivity(i)
-        }
-    }) }
+        })
+    }
 
     fun initAdapter(isMediator: Boolean = false) {
         binding.recyclerView.adapter = gameAdapter.withLoadStateHeaderAndFooter(

@@ -5,12 +5,18 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import androidx.room.withTransaction
+import com.example.gamewithpaging.Constants
 import com.example.gamewithpaging.db.GameDatabase
 import com.example.gamewithpaging.db.RemoteGameKey
 import com.example.gamewithpaging.model.GameResults
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.merge
 import okio.IOException
 import retrofit2.HttpException
 
+@ExperimentalCoroutinesApi
 @ExperimentalPagingApi
 class GameRemoteMediator(
     private val api: GameApi,
@@ -35,14 +41,37 @@ class GameRemoteMediator(
         }
 
         try {
-            val response = api.getGamesList(
-                page = page,
-                size = state.config.pageSize,
-                ordered = "released",
-                platforms = "4,5",
-                key = "905bf28dea024135b163cb11b38ced30"
-            )
-            val isEndOfList = response.results!!.isEmpty()
+            var response: List<GameResults> = mutableListOf()
+            val f1 = flow {
+                emit(
+                    api.getGamesList(
+                        page = page,
+                        size = state.config.pageSize,
+                        ordered = "",
+                        platforms = "5",
+                        key = "905bf28dea024135b163cb11b38ced30"
+                    )
+                )
+            }
+            val f2 = flow {
+                emit(
+                    api.getGamesList(
+                        page = page,
+                        size = state.config.pageSize,
+                        ordered = "",
+                        platforms = "4",
+                        key = "905bf28dea024135b163cb11b38ced30"
+                    )
+                )
+            }
+            merge(f1, f2).collect { game ->
+                response = mergedList(
+                    response,
+                    game.results!!
+                ).sortedWith(compareByDescending { it.rating })
+            }
+
+            val isEndOfList = response.isEmpty()
             db.withTransaction {
                 if (loadType == LoadType.REFRESH) {
                     db.getGameDao().deleteAll()
@@ -50,11 +79,11 @@ class GameRemoteMediator(
                 }
                 val prevKey = if (page == STARTING_PAGE_INDEX) null else page - 1
                 val nextKey = if (isEndOfList) null else page + 1
-                val keys = response.results.map {
+                val keys = response.map {
                     RemoteGameKey(it.id, prevKey = prevKey, nextKey = nextKey)
                 }
                 db.getGameKeysDao().insertAll(keys)
-                db.getGameDao().insertAll(response.results)
+                db.getGameDao().insertAll(response)
             }
             return MediatorResult.Success(endOfPaginationReached = isEndOfList)
         } catch (exception: IOException) {
@@ -108,5 +137,11 @@ class GameRemoteMediator(
             .firstOrNull { it.data.isNotEmpty() }
             ?.data?.firstOrNull()
             ?.let { game -> db.getGameKeysDao().remoteKeysGameId(game.id) }
+    }
+
+    fun <T> mergedList(first: List<T>, second: List<T>): List<T> {
+        val list: MutableList<T> = ArrayList(first)
+        list.addAll(second)
+        return list.toSet().toList()
     }
 }

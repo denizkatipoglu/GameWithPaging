@@ -2,10 +2,11 @@ package com.example.gamewithpaging.view.gamedetail
 
 import android.os.Bundle
 import android.text.Html
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
+import androidx.lifecycle.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.example.gamewithpaging.Constants
@@ -15,6 +16,9 @@ import com.example.gamewithpaging.model.GameDetailModel
 import com.example.gamewithpaging.model.GameResults
 import com.example.gamewithpaging.view.adapter.GameImageListAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class GameDetailActivity : AppCompatActivity() {
@@ -38,6 +42,11 @@ class GameDetailActivity : AppCompatActivity() {
     }
 
     private fun observeData() {
+        lifecycleScope.launch {
+            viewModel.titleFlow.collectLatest { title ->
+                Log.d(">>", title.toString())
+            }
+        }
         viewModel.getGameDetail().observe(this, Observer {
             updateUI(it)
         })
@@ -81,4 +90,29 @@ class GameDetailActivity : AppCompatActivity() {
             LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         bindingDetail.rvImages.adapter = gameImageAdapter
     }
+
+    fun <A, B> zipLiveData(a: LiveData<A>, b: LiveData<B>): LiveData<Pair<A, B>> {
+        return MediatorLiveData<Pair<A, B>>().apply {
+            var lastA: A? = null
+            var lastB: B? = null
+
+            fun update() {
+                val localLastA = lastA
+                val localLastB = lastB
+                if (localLastA != null && localLastB != null)
+                    this.value = Pair(localLastA, localLastB)
+            }
+
+            addSource(a) {
+                lastA = it
+                update()
+            }
+            addSource(b) {
+                lastB = it
+                update()
+            }
+        }
+    }
+
+
 }

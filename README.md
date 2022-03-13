@@ -25,6 +25,8 @@ Used technologies
 <br />
 -Retrofit
 <br />
+-Kotlin Flow
+<br />
 -Paging 3.0 (rc01)
 <br />
 <br />

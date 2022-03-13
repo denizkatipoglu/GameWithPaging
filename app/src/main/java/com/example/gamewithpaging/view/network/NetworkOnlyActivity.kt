@@ -10,7 +10,6 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
-
 @ExperimentalPagingApi
 @AndroidEntryPoint
 class NetworkOnlyActivity : BaseGameActivity() {

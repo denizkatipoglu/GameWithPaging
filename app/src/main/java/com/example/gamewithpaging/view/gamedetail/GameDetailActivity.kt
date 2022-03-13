@@ -16,9 +16,6 @@ import com.example.gamewithpaging.model.GameDetailModel
 import com.example.gamewithpaging.model.GameResults
 import com.example.gamewithpaging.view.adapter.GameImageListAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class GameDetailActivity : AppCompatActivity() {
@@ -42,11 +39,6 @@ class GameDetailActivity : AppCompatActivity() {
     }
 
     private fun observeData() {
-        lifecycleScope.launch {
-            viewModel.titleFlow.collectLatest { title ->
-                Log.d(">>", title.toString())
-            }
-        }
         viewModel.getGameDetail().observe(this, Observer {
             updateUI(it)
         })

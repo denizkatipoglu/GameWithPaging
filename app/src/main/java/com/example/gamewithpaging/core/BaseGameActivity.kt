@@ -39,7 +39,6 @@ abstract class BaseGameActivity : AppCompatActivity() {
             footer = GamesLoadStateAdapter { gameAdapter.retry() }
         )
 
-
         gameAdapter.addLoadStateListener { loadState ->
             val refreshState =
                 if (isMediator) {

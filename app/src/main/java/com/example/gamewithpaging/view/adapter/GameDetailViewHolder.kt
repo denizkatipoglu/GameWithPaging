@@ -12,7 +12,7 @@ class GameDetailViewHolder(private val binding: ItemGameDetailBinding) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(item: TagsList?) {
-        binding.imageTag.load(item!!.imageBackground!!) {
+        binding.imageTag.load(item!!.imageBackground) {
             placeholder(R.drawable.ic_launcher_background)
         }
     }

@@ -24,16 +24,24 @@ class GamePagingSource(private val service: GameApi) : PagingSource<Int, GameRes
             val f1 = flow {
                 emit(
                     service.getGamesList(
-                        page = page, size = 10, ordered = "-released",
-                        metacritic = "10,100",platforms = "5", key = "905bf28dea024135b163cb11b38ced30"
+                        page = page,
+                        size = 10,
+                        ordered = "-released",
+                        metacritic = "10,100",
+                        platforms = "5",
+                        key = "905bf28dea024135b163cb11b38ced30"
                     )
                 )
             }
             val f2 = flow {
                 emit(
                     service.getGamesList(
-                        page = page, size = 10, ordered = "-released",
-                        metacritic = "10,100",platforms = "4", key = "905bf28dea024135b163cb11b38ced30"
+                        page = page,
+                        size = 10,
+                        ordered = "-released",
+                        metacritic = "10,100",
+                        platforms = "4",
+                        key = "905bf28dea024135b163cb11b38ced30"
                     )
                 )
             }

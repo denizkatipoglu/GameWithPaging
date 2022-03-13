@@ -16,6 +16,7 @@ interface GameApi {
         @Query("page") page: Int,
         @Query("ordering") ordered: String,
         @Query("platforms") platforms: String,
+        @Query("metacritic") metacritic: String,
         @Query("key") key: String
     ): Game
 

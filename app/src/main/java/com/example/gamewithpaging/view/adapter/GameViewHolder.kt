@@ -1,5 +1,6 @@
 package com.example.gamewithpaging.view.adapter
 
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +20,12 @@ class GameViewHolder(private val binding: ItemGameBinding) : RecyclerView.ViewHo
             binding.textRating.text = item.rating
         } else {
             binding.textRating.text = "-"
+        }
+
+        if (!TextUtils.isEmpty(item.releasedDate)){
+            binding.textDate.text = item.releasedDate
+        }else{
+            binding.textDate.text = "-"
         }
         binding.imageGame.setOnClickListener {
             mlistener.onItemClick(item)

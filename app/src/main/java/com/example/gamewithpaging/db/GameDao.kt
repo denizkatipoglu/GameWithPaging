@@ -22,6 +22,6 @@ interface GameDao {
     @Query("DELETE FROM games_result")
     suspend fun deleteAll()
 
-    @Query("SELECT * FROM games_result ORDER BY rating DESC")
+    @Query("SELECT * FROM games_result ORDER BY releasedDate DESC")
     fun getGamesOrderByReleasedAsc():PagingSource<Int, GameResults>
 }

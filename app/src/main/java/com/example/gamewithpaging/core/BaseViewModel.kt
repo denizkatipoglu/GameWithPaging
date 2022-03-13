@@ -1,14 +1,13 @@
 package com.example.gamewithpaging.core
 
+import android.text.TextUtils
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.paging.Pager
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import androidx.paging.map
 import com.example.gamewithpaging.model.GameResults
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.map
 
 abstract class BaseViewModel : ViewModel() {
@@ -21,9 +20,10 @@ abstract class BaseViewModel : ViewModel() {
                     GameResults(
                         it.id,
                         it.name,
-                        it.backgroundImage!!,
+                        if (it.backgroundImage != null && !TextUtils.isEmpty(it.backgroundImage)) it.backgroundImage else "",
                         it.ratingCounts!!,
-                        it.rating
+                        it.rating,
+                        it.releasedDate
                     )
                 }
 

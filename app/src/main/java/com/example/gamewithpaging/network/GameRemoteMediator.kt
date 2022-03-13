@@ -46,8 +46,9 @@ class GameRemoteMediator(
                     api.getGamesList(
                         page = page,
                         size = state.config.pageSize,
-                        ordered = "",
+                        ordered = "-released",
                         platforms = "5",
+                        metacritic = "10,100",
                         key = "905bf28dea024135b163cb11b38ced30"
                     )
                 )
@@ -57,8 +58,9 @@ class GameRemoteMediator(
                     api.getGamesList(
                         page = page,
                         size = state.config.pageSize,
-                        ordered = "",
+                        ordered = "-released",
                         platforms = "4",
+                        metacritic = "10,100",
                         key = "905bf28dea024135b163cb11b38ced30"
                     )
                 )
@@ -67,7 +69,7 @@ class GameRemoteMediator(
                 response = mergedList(
                     response,
                     game.results!!
-                ).sortedWith(compareByDescending { it.rating })
+                ).sortedWith(compareByDescending { it.releasedDate })
             }
 
             val isEndOfList = response.isEmpty()

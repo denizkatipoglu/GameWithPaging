@@ -27,7 +27,7 @@
         <TextView
             android:id="@+id/text_game"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="60dp"
             android:background="@color/color_black_shadow"
             android:gravity="center_vertical"
             android:paddingStart="12dp"
@@ -39,15 +39,16 @@
 
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
+            android:layout_height="60dp"
             app:layout_constraintBottom_toBottomOf="@+id/image_game"
             app:layout_constraintRight_toRightOf="@+id/image_game">
+
 
             <ImageView
                 android:id="@+id/image_star"
                 android:layout_width="16dp"
                 android:layout_height="16dp"
-                android:layout_centerVertical="true"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 android:src="@drawable/ic_star" />
@@ -56,11 +57,32 @@
                 android:id="@+id/text_rating"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_toEndOf="@+id/image_star"
                 android:textColor="@color/white"
                 tools:text="3.34" />
+
+            <ImageView
+                android:id="@+id/image_date"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:src="@drawable/ic_calendar" />
+
+            <TextView
+                android:id="@+id/text_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerInParent="true"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_toEndOf="@+id/image_date"
+                android:textColor="@color/white"
+                tools:text="2022-12-12" />
         </RelativeLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 

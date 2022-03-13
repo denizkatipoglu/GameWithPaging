@@ -32,7 +32,7 @@ class GamesRepository @Inject constructor(
 
     @ExperimentalPagingApi
     fun getGamesFromDb(): Flow<PagingData<GameResults>> {
-        val pagingSourceFactory = { database.getGameDao().getAll() }
+        val pagingSourceFactory = { database.getGameDao().getGamesOrderByReleasedAsc() }
 
         return Pager(
             config = PagingConfig(
@@ -46,7 +46,7 @@ class GamesRepository @Inject constructor(
 
     @ExperimentalPagingApi
     fun getGamesFromMediator(): Flow<PagingData<GameResults>> {
-        val pagingSourceFactory = { database.getGameDao().getAll() }
+        val pagingSourceFactory = { database.getGameDao().getGamesOrderByReleasedAsc() }
 
         return Pager(
             config = PagingConfig(
